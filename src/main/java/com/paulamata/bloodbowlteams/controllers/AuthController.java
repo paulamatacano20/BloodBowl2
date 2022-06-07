@@ -43,7 +43,6 @@ import com.paulamata.bloodbowlteams.dto.RespuestaLoginDTO;
 import com.paulamata.bloodbowlteams.dto.UsuarioDTO;
 import com.paulamata.bloodbowlteams.entity.Usuarios;
 import com.paulamata.bloodbowlteams.models.services.IUsuarioService;
-import com.paulamata.bloodbowlteams.models.services.NotificationService;
 import com.paulamata.bloodbowlteams.security.SecurityConstants;
 import org.apache.catalina.connector.ClientAbortException;
 
@@ -57,9 +56,7 @@ public class AuthController{
 	public static Session session;
 	@Autowired
 	private IUsuarioService usuarioService;
-	
-	@Autowired
-	private NotificationService notificationService;
+
 	
 	@PostMapping("/login")
 	public ResponseEntity<RespuestaLoginDTO> login(@RequestBody UsuarioDTO usuarioLogin){	
@@ -98,7 +95,7 @@ public class AuthController{
 		if(find) {
 			
 			return usuarioService.findAll().stream()
-					.filter(e -> e.getNombre() == usuario).map(Usuarios::getContrasenya).toList().get(0);
+					.filter(e -> e.getNombre() == usuario).map(Usuarios::getContrasenya).toList().get(0).toString();
 
 		}
 		
