@@ -84,25 +84,27 @@ public class AuthController{
 		}
 	}
 	@PostMapping("/restablecer")
-	public String restablecer(@RequestBody String usuario) throws NoSuchAlgorithmException, IOException, AddressException, MessagingException{
+	public ResponseEntity<RespuestaLoginDTO> restablecer(@RequestBody Usuarios usuario) throws NoSuchAlgorithmException, IOException, AddressException, MessagingException{
 		
-		boolean find = true;
+		boolean find = false;
 		for (Usuarios u : usuarioService.findAll()) {
-			if(u.getNombre().contains(usuario)) {
+			if(u.getNombre().equals(usuario.getNombre())) {
 				find = true;
 			}
 
 		}
 		if(find) {
-			
-			return usuarioService.findAll().stream()
-					.filter(e -> e.getNombre() == "paulisken@gmail.com").map(Usuarios::getContrasenya)
-					.collect(Collectors.toList()).get(0);
+			List<Usuarios> list = usuarioService.findAll();
+			List<String> listString = list.stream()
+					.filter(e -> e.getNombre().equals(usuario.getNombre())).map(Usuarios::getContrasenya)
+					.collect(Collectors.toList());
 
+			return ResponseEntity.ok().body(new RespuestaLoginDTO(listString.get(0)));
+			
 		}
 		
 		else {
-			return null;
+			return ResponseEntity.ok().body(new RespuestaLoginDTO(""));
 		}
 			
 			

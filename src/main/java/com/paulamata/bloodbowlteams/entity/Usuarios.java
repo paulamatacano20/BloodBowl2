@@ -15,7 +15,6 @@ import javax.persistence.Table;
 public class Usuarios implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
-	@Column(unique = true)
 	private String nombre;
 	private String contrasenya;
 	public String getNombre() {
