@@ -17,10 +17,7 @@ public class NotificationService {
 		
 	
 	public void sendNotification(String usuario) throws MailException{
-		
-		Properties prop = new Properties();
-		
-		System.out.println("............................................................................"+prop.get("spring.mail.host"));
+
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(usuario);
 		mail.setFrom("paulisken@gmail.com");
