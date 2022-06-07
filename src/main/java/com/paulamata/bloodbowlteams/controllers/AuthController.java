@@ -72,7 +72,7 @@ public class AuthController{
 		}
 	}
 	
-	@PostMapping("/register2")
+	@PostMapping("/register")
 	public ResponseEntity<Void> register(@RequestBody UsuarioDTO usuarioDto) throws NoSuchAlgorithmException {
 		boolean existe = consultarUsuarios(usuarioDto);
 		boolean resultado = false;
@@ -85,7 +85,7 @@ public class AuthController{
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
 		}
 	}
-	@PostMapping("/restablecer")
+	@PostMapping("/restablecer2")
 	public ResponseEntity<Void> restablecer(@RequestBody String usuario) throws NoSuchAlgorithmException, IOException, AddressException, MessagingException{
 		
 		boolean find = true;
