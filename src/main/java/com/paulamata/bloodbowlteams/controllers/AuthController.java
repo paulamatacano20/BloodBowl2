@@ -85,7 +85,7 @@ public class AuthController{
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
 		}
 	}
-	@PostMapping("/restablecer2")
+	@PostMapping("/restablecer")
 	public ResponseEntity<Void> restablecer(@RequestBody String usuario) throws NoSuchAlgorithmException, IOException, AddressException, MessagingException{
 		
 		boolean find = true;
