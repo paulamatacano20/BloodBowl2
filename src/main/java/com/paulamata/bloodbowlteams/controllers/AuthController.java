@@ -72,7 +72,7 @@ public class AuthController{
 		}
 	}
 	
-	@PostMapping("/register")
+	@PostMapping("/register2")
 	public ResponseEntity<Void> register(@RequestBody UsuarioDTO usuarioDto) throws NoSuchAlgorithmException {
 		boolean existe = consultarUsuarios(usuarioDto);
 		boolean resultado = false;

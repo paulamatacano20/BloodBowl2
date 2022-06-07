@@ -20,7 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()	
 			.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 			.authorizeRequests()
-			.antMatchers("/auth/login", "/auth/register", "/auth/restablecer").permitAll()
+			.antMatchers("/auth/login", "/auth/register", "/auth/restablecer2").permitAll()
 			.anyRequest().authenticated();
 	}
 	
