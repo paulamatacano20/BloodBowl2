@@ -19,7 +19,7 @@ public class NotificationService {
 		mail.setTo(usuario);
 		mail.setFrom("paulisken@gmail.com");
 		mail.setSubject("Recuperación de contraseña");
-		mail.setText("Su contraseña es ");
+		mail.setText("Su contraseña es ninguna");
 
 		
 		javaMailSender.send(mail);
