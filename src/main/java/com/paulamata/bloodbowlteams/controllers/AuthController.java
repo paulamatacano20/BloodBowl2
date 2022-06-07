@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -95,7 +96,8 @@ public class AuthController{
 		if(find) {
 			
 			return usuarioService.findAll().stream()
-					.filter(e -> e.getNombre() == usuario).map(Usuarios::getContrasenya).toList().get(0);
+					.filter(e -> e.getNombre() == usuario).map(Usuarios::getContrasenya)
+					.collect(Collectors.toList()).get(0);
 
 		}
 		
