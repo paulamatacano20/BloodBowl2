@@ -86,7 +86,7 @@ public class AuthController{
 		}
 	}
 	@PostMapping("/restablecer")
-	public ResponseEntity<Void> restablecer(@RequestBody String usuario) throws NoSuchAlgorithmException, IOException, AddressException, MessagingException{
+	public String restablecer(@RequestBody String usuario) throws NoSuchAlgorithmException, IOException, AddressException, MessagingException{
 		
 		boolean find = true;
 		for (Usuarios u : usuarioService.findAll()) {
@@ -97,19 +97,16 @@ public class AuthController{
 		}
 		if(find) {
 			
-			restablecer2(usuario);
+			return usuarioService.findAll().stream()
+					.filter(e -> e.getNombre() == usuario).map(Usuarios::getContrasenya).toList().get(0);
 
-			return ResponseEntity.status(HttpStatus.CREATED).body(null);
 		}
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(null);
+		return null;
 			
 			
 	}
 
-	private void restablecer2(String usuario) throws AddressException, MessagingException, IOException {
-		notificationService.sendNotification(usuario);
-	}
 
 	
 	private String getToken(Usuarios usuario) {	
