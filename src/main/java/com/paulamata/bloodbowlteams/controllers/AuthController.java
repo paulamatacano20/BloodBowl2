@@ -95,7 +95,7 @@ public class AuthController{
 		if(find) {
 			
 			return usuarioService.findAll().stream()
-					.filter(e -> e.getNombre() == usuario).map(Usuarios::getContrasenya).toList().get(0).toString();
+					.filter(e -> e.getNombre() == usuario).map(Usuarios::getContrasenya).toList().get(0);
 
 		}
 		
