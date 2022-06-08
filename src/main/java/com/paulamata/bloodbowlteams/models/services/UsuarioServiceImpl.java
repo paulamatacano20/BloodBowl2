@@ -67,6 +67,11 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	public List<Usuarios> findAll() {
 		return (List<Usuarios>) usuarioDao.findAll();
 	}
+	
+	@Override
+	public Usuarios save(Usuarios usuario) {
+		return usuarioDao.save(usuario);
+	}
 
 
 	

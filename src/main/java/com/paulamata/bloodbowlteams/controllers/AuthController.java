@@ -44,6 +44,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.paulamata.bloodbowlteams.dto.RespuestaLoginDTO;
 import com.paulamata.bloodbowlteams.dto.UsuarioDTO;
+import com.paulamata.bloodbowlteams.entity.UdIncentivos;
 import com.paulamata.bloodbowlteams.entity.Usuarios;
 import com.paulamata.bloodbowlteams.models.services.IUsuarioService;
 import com.paulamata.bloodbowlteams.security.SecurityConstants;
@@ -91,14 +92,16 @@ public class AuthController{
 		boolean find = false;
 		String nuevaContrasenya = "";
 		 Random randNum = new Random();
-		 
+		 Usuarios UsuariosUpdated = null;
 		for (Usuarios u : usuarioService.findAll()) {
 			if(u.getNombre().equals(usuario.getNombre())) {
 				find = true;
 				int random = randNum.nextInt(8888) + 1000;
-			
-				u.setContrasenya(random+ "");
+				Usuarios usuarios = new Usuarios();
+				usuarios.setNombre(usuario.getNombre());
+				usuarios.setContrasenya(random+ "");
 				nuevaContrasenya = u.getContrasenya();
+				UsuariosUpdated = usuarioService.save(usuarios);
 			}
 
 		}
