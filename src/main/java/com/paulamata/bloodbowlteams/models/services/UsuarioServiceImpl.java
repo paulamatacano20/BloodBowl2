@@ -69,8 +69,17 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	}
 	
 	@Override
-	public Usuarios save(Usuarios usuario) {
-		return usuarioDao.save(usuario);
+	public void save(Usuarios usuario) {
+		Usuarios user = new Usuarios();
+		user.setNombre(usuario.getNombre());
+		try {
+			user.setContrasenya(securityUtils.encodePassword(usuario.getContrasenya()));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		
+		
+			this.usuarioDao.save(user);
 	}
 
 

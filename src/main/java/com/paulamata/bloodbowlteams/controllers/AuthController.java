@@ -93,23 +93,23 @@ public class AuthController{
 		String nuevaContrasenya = "";
 		 Random randNum = new Random();
 		 Usuarios UsuariosUpdated = null;
-		 Usuarios UsuarioActual  = usuario;
-		 
+		 Usuarios UsuarioActual  = new Usuarios();
+		 int random = 0;
 		for (Usuarios u : usuarioService.findAll()) {
 			if(u.getNombre().equals(usuario.getNombre())) {
 				find = true;
-				int random = randNum.nextInt(8888) + 1000;
-				String contr = random+ "";
-				
-				UsuarioActual.setNombre(usuario.getNombre());
-				UsuarioActual.setContrasenya(contr);
-				
-				nuevaContrasenya = contr;
-				UsuariosUpdated = usuarioService.save(UsuarioActual);
+				random = randNum.nextInt(8888) + 1000;
 			}
 
 		}
 		if(find) {
+			String contr = random+ "";
+			
+			UsuarioActual.setNombre(usuario.getNombre());
+			UsuarioActual.setContrasenya(contr);
+			
+			nuevaContrasenya = contr;
+			usuarioService.save(UsuarioActual);
 			return ResponseEntity.ok().body(new RespuestaLoginDTO(nuevaContrasenya));	
 		}
 		
@@ -123,16 +123,20 @@ public class AuthController{
 	public ResponseEntity<?> cambiar(@RequestBody Usuarios usuario) throws NoSuchAlgorithmException, IOException, AddressException, MessagingException{
 		
 		boolean find = false;
-		 
+		Usuarios UsuarioActual  = new Usuarios();
 		for (Usuarios u : usuarioService.findAll()) {
 			if(u.getNombre().equals(usuario.getNombre())) {
 				find = true;
-				u.setContrasenya(usuario.getContrasenya());
-				
+								
 			}
 
 		}
 		if(find) {
+			UsuarioActual.setNombre(usuario.getNombre());
+			UsuarioActual.setContrasenya(usuario.getContrasenya());
+			
+			usuarioService.save(UsuarioActual);
+			
 			return ResponseEntity.status(HttpStatus.CREATED).body(null);
 		}
 		

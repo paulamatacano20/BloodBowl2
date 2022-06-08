@@ -12,6 +12,6 @@ public interface IUsuarioService {
 	public Usuarios login(String nombre, String contrasenya);
 	public boolean register(UsuarioDTO usuarioDto);
 	public List<Usuarios> findAll();
-	public Usuarios save(Usuarios usuario);
+	public void save(Usuarios usuario);
 
 }
