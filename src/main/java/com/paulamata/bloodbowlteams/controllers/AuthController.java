@@ -95,7 +95,7 @@ public class AuthController{
 		for (Usuarios u : usuarioService.findAll()) {
 			if(u.getNombre().equals(usuario.getNombre())) {
 				find = true;
-				IntStream random = randNum.ints(1000).limit(9999);
+				int random = randNum.nextInt(8888) + 1000;
 			
 				u.setContrasenya(random+ "");
 				nuevaContrasenya = u.getContrasenya();
