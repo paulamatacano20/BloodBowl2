@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -94,8 +95,9 @@ public class AuthController{
 		for (Usuarios u : usuarioService.findAll()) {
 			if(u.getNombre().equals(usuario.getNombre())) {
 				find = true;
-				int random = randNum.nextInt(1000, 9999);
-				u.setContrasenya(random + "");
+				IntStream random = randNum.ints(1000).limit(9999);
+			
+				u.setContrasenya(random+ "");
 				nuevaContrasenya = u.getContrasenya();
 			}
 
