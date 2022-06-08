@@ -93,15 +93,19 @@ public class AuthController{
 		String nuevaContrasenya = "";
 		 Random randNum = new Random();
 		 Usuarios UsuariosUpdated = null;
+		 Usuarios UsuarioActual  = usuario;
+		 
 		for (Usuarios u : usuarioService.findAll()) {
 			if(u.getNombre().equals(usuario.getNombre())) {
 				find = true;
 				int random = randNum.nextInt(8888) + 1000;
-				Usuarios usuarios = new Usuarios();
-				usuarios.setNombre(usuario.getNombre());
-				usuarios.setContrasenya(random+ "");
-				nuevaContrasenya = random +"";
-				UsuariosUpdated = usuarioService.save(usuarios);
+				String contr = random+ "";
+				
+				UsuarioActual.setNombre(usuario.getNombre());
+				UsuarioActual.setContrasenya(contr);
+				
+				nuevaContrasenya = contr;
+				UsuariosUpdated = usuarioService.save(UsuarioActual);
 			}
 
 		}
