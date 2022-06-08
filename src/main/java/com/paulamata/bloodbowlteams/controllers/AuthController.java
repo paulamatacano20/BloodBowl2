@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import javax.mail.Message;
@@ -87,24 +88,47 @@ public class AuthController{
 	public ResponseEntity<RespuestaLoginDTO> restablecer(@RequestBody Usuarios usuario) throws NoSuchAlgorithmException, IOException, AddressException, MessagingException{
 		
 		boolean find = false;
+		String nuevaContrasenya = "";
+		 Random randNum = new Random();
+		 
 		for (Usuarios u : usuarioService.findAll()) {
 			if(u.getNombre().equals(usuario.getNombre())) {
 				find = true;
+				int random = randNum.nextInt(1000, 9999);
+				u.setContrasenya(random + "");
+				nuevaContrasenya = u.getContrasenya();
 			}
 
 		}
 		if(find) {
-			List<Usuarios> list = usuarioService.findAll();
-			List<String> listString = list.stream()
-					.filter(e -> e.getNombre().equals(usuario.getNombre())).map(Usuarios::getContrasenya)
-					.collect(Collectors.toList());
-
-			return ResponseEntity.ok().body(new RespuestaLoginDTO(listString.get(0)));
-			
+			return ResponseEntity.ok().body(new RespuestaLoginDTO(nuevaContrasenya));	
 		}
 		
 		else {
-			return ResponseEntity.ok().body(new RespuestaLoginDTO(""));
+			return ResponseEntity.ok().body(new RespuestaLoginDTO("0"));
+		}
+			
+			
+	}
+	@PostMapping("/cambiar")
+	public ResponseEntity<?> cambiar(@RequestBody Usuarios usuario) throws NoSuchAlgorithmException, IOException, AddressException, MessagingException{
+		
+		boolean find = false;
+		 
+		for (Usuarios u : usuarioService.findAll()) {
+			if(u.getNombre().equals(usuario.getNombre())) {
+				find = true;
+				u.setContrasenya(usuario.getContrasenya());
+				
+			}
+
+		}
+		if(find) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(null);
+		}
+		
+		else {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
 		}
 			
 			
