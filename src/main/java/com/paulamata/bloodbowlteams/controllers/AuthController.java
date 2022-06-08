@@ -100,7 +100,7 @@ public class AuthController{
 				Usuarios usuarios = new Usuarios();
 				usuarios.setNombre(usuario.getNombre());
 				usuarios.setContrasenya(random+ "");
-				nuevaContrasenya = u.getContrasenya();
+				nuevaContrasenya = random +"";
 				UsuariosUpdated = usuarioService.save(usuarios);
 			}
 
